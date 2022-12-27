@@ -9,10 +9,16 @@ import {
 import { Toast } from "@shopify/app-bridge-react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 
+type EmptyToastProps = {
+  content: string | null;
+  error?: boolean;
+};
+
 export function ProductsCard() {
-  const emptyToastProps = { content: null };
+  const emptyToastProps: EmptyToastProps = { content: null };
   const [isLoading, setIsLoading] = useState(true);
-  const [toastProps, setToastProps] = useState(emptyToastProps);
+  const [toastProps, setToastProps] =
+    useState<EmptyToastProps>(emptyToastProps);
   const fetch = useAuthenticatedFetch();
 
   const {

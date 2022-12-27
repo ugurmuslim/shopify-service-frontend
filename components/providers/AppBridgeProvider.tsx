@@ -12,12 +12,12 @@ import { Banner, Layout, Page } from "@shopify/polaris";
  *
  * See: https://shopify.dev/apps/tools/app-bridge/getting-started/using-react
  */
-export function AppBridgeProvider({ children }) {
+export function AppBridgeProvider({ children }: any) {
   const location = useLocation();
   const navigate = useNavigate();
   const history = useMemo(
     () => ({
-      replace: (path) => {
+      replace: (path: any) => {
         navigate(path, { replace: true });
       },
     }),
