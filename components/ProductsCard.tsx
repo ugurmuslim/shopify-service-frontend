@@ -5,68 +5,78 @@ import {
   TextContainer,
   DisplayText,
   TextStyle,
+  Button,
 } from "@shopify/polaris";
 import { Toast } from "@shopify/app-bridge-react";
-import { useAppQuery, useAuthenticatedFetch } from "../hooks";
+import { useAuthenticatedFetch } from "../hooks";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 
-type EmptyToastProps = {
-  content: string | null;
-  error?: boolean;
-};
+function useProductCount() {
+  const fetch = useAuthenticatedFetch();
+  return useQuery(["api", "products", "count"], async () => {
+    const { count } = await fetch("/api/products/count").then((res) =>
+      res.json()
+    );
+    return count as number;
+  });
+}
+
+function useProductCreate(noOfProducts = 2, showToast: () => void) {
+  const queryClient = useQueryClient();
+  const fetch = useAuthenticatedFetch();
+  return useMutation(
+    ["api", "product"],
+    async () => {
+      await fetch("/api/products/create/" + noOfProducts);
+    },
+    {
+      onMutate: async () => {
+        await queryClient.cancelQueries(["api", "products", "count"]);
+        const previousCount: number = +queryClient.getQueryData([
+          "api",
+          "products",
+          "count",
+        ]);
+        queryClient.setQueryData(
+          ["api", "products", "count"],
+          () => previousCount + 2
+        );
+        return { previousCount };
+      },
+      onError: (err, variables, context) => {
+        queryClient.setQueryData(
+          ["api", "products", "count"],
+          context.previousCount
+        );
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries(["api", "products", "count"]);
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(["api", "products", "count"]);
+        showToast();
+      },
+    }
+  );
+}
 
 export function ProductsCard() {
-  const emptyToastProps: EmptyToastProps = { content: null };
-  const [isLoading, setIsLoading] = useState(true);
-  const [toastProps, setToastProps] =
-    useState<EmptyToastProps>(emptyToastProps);
-  const fetch = useAuthenticatedFetch();
+  const [hasResults, setHasResults] = useState(false);
+  const showToast = () => setHasResults(true);
+  const { mutate } = useProductCreate(2, showToast);
+  const { data: count, isLoading, error } = useProductCount();
 
-  const {
-    data,
-    refetch: refetchProductCount,
-    isLoading: isLoadingCount,
-    isRefetching: isRefetchingCount,
-  } = useAppQuery({
-    url: "/api/products/count",
-    reactQueryOptions: {
-      onSuccess: () => {
-        setIsLoading(false);
-      },
-    },
-  });
-
-  const toastMarkup = toastProps.content && !isRefetchingCount && (
-    <Toast {...toastProps} onDismiss={() => setToastProps(emptyToastProps)} />
+  const toastMarkup = hasResults && (
+    <Toast
+      content="2 products created!"
+      onDismiss={() => setHasResults(false)}
+    />
   );
-
-  const handlePopulate = async () => {
-    setIsLoading(true);
-    const response = await fetch("/api/products/create");
-
-    if (response.ok) {
-      await refetchProductCount();
-      setToastProps({ content: "5 products created!" });
-    } else {
-      setIsLoading(false);
-      setToastProps({
-        content: "There was an error creating products",
-        error: true,
-      });
-    }
-  };
 
   return (
     <>
       {toastMarkup}
-      <Card
-        title="Product Counter"
-        sectioned
-        primaryFooterAction={{
-          content: "Populate 5 products",
-          onAction: handlePopulate,
-          loading: isLoading,
-        }}
-      >
+      <Card title="Product Counter" sectioned>
         <TextContainer spacing="loose">
           <p>
             Sample products are created with a default title and price. You can
@@ -76,10 +86,15 @@ export function ProductsCard() {
             TOTAL PRODUCTS
             <DisplayText size="medium">
               <TextStyle variation="strong">
-                {isLoadingCount ? "-" : data.count}
+                {isLoading && ".."}
+                {error && "??"}
+                {!isLoading && count}
               </TextStyle>
             </DisplayText>
           </Heading>
+          <Button outline loading={isLoading} onClick={mutate}>
+            Populate 2 products
+          </Button>
         </TextContainer>
       </Card>
     </>

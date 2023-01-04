@@ -1,22 +1,43 @@
 import {
+  ActionList,
   Card,
-  Page,
-  Layout,
-  TextContainer,
+  Heading,
   Image,
+  Layout,
+  Page,
   Stack,
   Link,
-  Heading,
+  TextContainer,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-
-import { trophyImage } from "../assets";
-
-import { ProductsCard } from "../components";
+import { useNavigate } from "react-router-dom";
+import trophyImgUrl from "../assets/home-trophy.png";
+import { ProductsCard } from "../components/ProductsCard.js";
+// import analytics from "../lib/segment/index.js";
 
 export default function HomePage() {
+  // Example tracking
+  // analytics.page({
+  //   userId: "testshopify.myshopify.com",
+  //   name: "Home",
+  //   type: "page",
+  // });
+  const navigate = useNavigate();
+  const pagesLinks = [
+    {
+      content: "Page Index Example",
+      helpText: "Page Index route",
+      onAction: () => navigate("/PageIndex"),
+    },
+    {
+      content: "Page Generic Example",
+      helpText: "Page Generic route",
+      onAction: () => navigate("/PageGeneral"),
+    },
+  ];
+
   return (
-    <Page narrowWidth>
+    <Page fullWidth>
       <TitleBar title="App name" primaryAction={null} />
       <Layout>
         <Layout.Section>
@@ -49,10 +70,7 @@ export default function HomePage() {
                     </Link>{" "}
                     UI library and components.
                   </p>
-                  <p>
-                    Ready to go? Start populating your app with some sample
-                    products to view and test in your store.{" "}
-                  </p>
+
                   <p>
                     Learn more about building out your app in{" "}
                     <Link
@@ -68,7 +86,7 @@ export default function HomePage() {
               <Stack.Item>
                 <div style={{ padding: "0 20px" }}>
                   <Image
-                    source={trophyImage}
+                    source={trophyImgUrl}
                     alt="Nice work on building a Shopify app"
                     width={120}
                   />
@@ -77,8 +95,13 @@ export default function HomePage() {
             </Stack>
           </Card>
         </Layout.Section>
-        <Layout.Section>
+        <Layout.Section secondary>
           <ProductsCard />
+        </Layout.Section>
+        <Layout.Section fullWidth>
+          <Card>
+            <ActionList actionRole="menuitem" items={pagesLinks} />
+          </Card>
         </Layout.Section>
       </Layout>
     </Page>
