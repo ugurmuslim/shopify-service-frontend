@@ -23,6 +23,6 @@
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
   "no-empty-function": "off",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "../@types/window.d.ts"],
   "exclude": ["node_modules/**"]
 }

@@ -1,11 +1,8 @@
 import { DisplayText, Page, Stack } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-import { ActiveSubscriptions } from "../components/ActiveSubscriptions.js";
-import { useNavigate } from "react-router";
+import { ActiveSubscriptions } from "../components/ActiveSubscriptions";
 
 const Settings = () => {
-  const navigate = useNavigate();
-
   return (
     <Page>
       <TitleBar title="Settings" primaryAction={null} />

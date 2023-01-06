@@ -4,19 +4,19 @@ import { Redirect } from "@shopify/app-bridge/actions";
 import { Toast, useAppBridge } from "@shopify/app-bridge-react";
 import { useAuthenticatedFetch } from "../hooks";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Subscription } from "../../@types/billing";
 
-function generateRows(subscriptionData: {
-  appInstallation: { activeSubscriptions: any[] };
-}) {
+function generateRows(subscriptionData: Subscription) {
   const activeSubscriptions =
     subscriptionData.appInstallation.activeSubscriptions;
   if (activeSubscriptions.length === 0) {
     return [["No Plan", "N/A", "N/A", "N/A", "USD 0.00"]];
   } else {
-    return Object.entries(activeSubscriptions).map(([key, value]) => {
-      const { name, status, test, trialDays } = value as any;
-      const { amount, currencyCode } = (value as any).lineItems[0].plan
-        .pricingDetails.price;
+    return Object.entries(activeSubscriptions).map((subData) => {
+      const value = subData[1];
+      const { name, status, test, trialDays } = value;
+      const { amount, currencyCode } =
+        value.lineItems[0].plan.pricingDetails.price;
       return [
         name,
         status,
@@ -31,7 +31,9 @@ function generateRows(subscriptionData: {
 function useGetSubscription() {
   const fetch = useAuthenticatedFetch();
   return useQuery(["api", "subscription"], async () => {
-    const data = await fetch("/api/billing").then((res: any) => res.json());
+    const data: Subscription = await fetch("/api/billing").then(
+      (res: Response) => res.json()
+    );
     return generateRows(data);
   });
 }
@@ -52,9 +54,9 @@ function useDoSubscribe(showToast: ToastFn) {
   return useMutation(
     ["api", "billing"],
     async () => {
-      const { url } = await fetch("/api/billing", {
+      const { url }: { url: string } = await fetch("/api/billing", {
         method: "POST",
-      }).then((res: any) => res.json());
+      }).then((res: Response) => res.json());
       redirect.dispatch(Redirect.Action.REMOTE, url);
     },
     {
@@ -75,7 +77,7 @@ function useDoUnsubscribe(showToast: ToastFn) {
     async () => {
       await fetch("/api/billing", {
         method: "DELETE",
-      }).then((res: any) => res.json());
+      }).then((res: Response) => res.json());
     },
     {
       onSuccess: async () => {

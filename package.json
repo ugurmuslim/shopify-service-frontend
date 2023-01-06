@@ -14,7 +14,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">= 12.16"
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "@shopify/app-bridge": "^3.5.0",

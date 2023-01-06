@@ -1,9 +1,17 @@
 import { createContext, useContext, useMemo, useReducer } from "react";
+import type { ShopUpdate } from "../../@types/shop";
+import { PropsWithChildren } from "react";
+
+type Action = {
+  type: "GET_SHOP" | "UPDATE_SHOP";
+  payload?: ShopUpdate;
+};
 
 const initialState = {};
 const shopContext = createContext(initialState);
 
-function reducer(state: any, action: any) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function reducer(state: any, action: Action) {
   switch (action.type) {
     case "GET_SHOP": {
       return {
@@ -23,7 +31,7 @@ function reducer(state: any, action: any) {
   }
 }
 
-export const ShopProvider = (props: any) => {
+export const ShopProvider = (props: PropsWithChildren) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // METHODS
@@ -31,7 +39,7 @@ export const ShopProvider = (props: any) => {
     dispatch({ type: "GET_SHOP" });
   };
 
-  const updateShop = (payload: any) => {
+  const updateShop = (payload: ShopUpdate) => {
     dispatch({ type: "UPDATE_SHOP", payload });
   };
 
@@ -57,10 +65,6 @@ export const useShop = () => {
   return context;
 };
 
-type Props = {
-  children: React.ReactElement | React.ReactElement[];
-};
-
-export const ShopContextProvider = ({ children }: Props) => (
+export const ShopContextProvider = ({ children }: PropsWithChildren) => (
   <ShopProvider>{children}</ShopProvider>
 );

@@ -1,2 +1,2 @@
 export { useAuthenticatedFetch } from "./useAuthenticatedFetch";
-export { useShop, ShopContextProvider } from "./useShop.jsx";
+export { useShop, ShopContextProvider } from "./useShop";

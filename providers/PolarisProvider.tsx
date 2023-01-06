@@ -3,8 +3,14 @@ import { AppProvider } from "@shopify/polaris";
 import { useNavigate } from "@shopify/app-bridge-react";
 import translations from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/build/esm/styles.css";
+import { PropsWithChildren } from "react";
 
-function AppBridgeLink({ url, children, external, ...rest }: any) {
+function AppBridgeLink({
+  url,
+  children,
+  external,
+  ...rest
+}: PropsWithChildren<{ url: string; external: boolean }>) {
   const navigate = useNavigate();
   const handleClick = useCallback(() => {
     navigate(url);
@@ -47,11 +53,7 @@ function AppBridgeLink({ url, children, external, ...rest }: any) {
  * PolarisProvider also passes translations to Polaris.
  *
  */
-type Props = {
-  children: React.ReactElement | React.ReactElement[];
-};
-
-export function PolarisProvider({ children }: Props) {
+export function PolarisProvider({ children }: PropsWithChildren) {
   return (
     <AppProvider i18n={translations} linkComponent={AppBridgeLink}>
       {children}
