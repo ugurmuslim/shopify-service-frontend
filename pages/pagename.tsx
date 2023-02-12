@@ -20,7 +20,7 @@ export default function PageName() {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <Text variant="headingMd" as="h1">
+            <Text variant="headingMd" as="h2">
               Heading
             </Text>
             <TextContainer>
@@ -28,7 +28,7 @@ export default function PageName() {
             </TextContainer>
           </Card>
           <Card sectioned>
-            <Text variant="headingMd" as="h1">
+            <Text variant="headingMd" as="h2">
               Heading
             </Text>
             <TextContainer>

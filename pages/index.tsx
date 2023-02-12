@@ -55,8 +55,8 @@ export default function HomePage() {
             >
               <Stack.Item fill>
                 <TextContainer spacing="loose">
-                  <Text variant="headingMd" as="h1">
-                    Nice work on building a Shopify app 🎉🎉
+                  <Text as="h2" variant="headingMd">
+                    Nice work on building a Shopify app 🎉
                   </Text>
                   <p>
                     Your app is ready to explore! It contains everything you
