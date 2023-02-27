@@ -2,9 +2,9 @@ import { BrowserRouter } from "react-router-dom";
 import { NavigationMenu } from "@shopify/app-bridge-react";
 import Routes from "./Routes";
 
-import { GlobalLoadingIndicator } from "./components/GlobalLoadingIndicator.jsx";
+import { GlobalLoadingIndicator } from "./components/GlobalLoadingIndicator";
 import { AppBridgeProvider, QueryProvider, PolarisProvider } from "./providers";
-import { ShopContextProvider } from "./hooks/index.js";
+import { ShopContextProvider } from "./hooks/index";
 import { HelmetProvider } from "react-helmet-async";
 import type { Route } from "./Routes";
 

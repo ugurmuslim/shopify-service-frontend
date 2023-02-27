@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import trophyImgUrl from "../assets/home-trophy.png";
 import React, { Suspense } from "react";
 const ProductsCard = React.lazy(() => import("../components/ProductsCard"));
-import mixpanel from "../lib/mixpanel.js";
+import mixpanel from "../lib/mixpanel";
 
 const updateMixPanel = () => {
   mixpanel.then((mp) => {

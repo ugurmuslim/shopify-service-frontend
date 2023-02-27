@@ -9,7 +9,7 @@ import {
 } from "react";
 import { PropsWithChildren } from "react";
 import { useAuthenticatedFetch } from "../hooks";
-import mixpanel from "../lib/mixpanel.js";
+import mixpanel from "../lib/mixpanel";
 
 type ShopObj = { shop: string };
 type Action = {

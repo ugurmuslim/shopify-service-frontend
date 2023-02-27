@@ -9,7 +9,7 @@ import {
 } from "@shopify/polaris";
 import { useNavigate } from "react-router";
 import trophyImgUrl from "../assets/home-trophy.png";
-import mixpanel from "../lib/mixpanel.js";
+import mixpanel from "../lib/mixpanel";
 
 const updateMixPanel = () => {
   mixpanel.then((mp) => {
