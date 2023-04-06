@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import react from "@vitejs/plugin-react";
+import { compression } from "vite-plugin-compression2";
 
 if (
   process.env.npm_lifecycle_event === "build" &&
@@ -43,7 +44,19 @@ if (host === "localhost") {
 
 export default defineConfig({
   root: dirname(fileURLToPath(import.meta.url)),
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({
+      algorithm: "gzip",
+      filter: /\.(json|css|html)$/i,
+      exclude: [/\.(html)$/, /\.(br)$/, /\.(gz)$/],
+    }),
+    compression({
+      algorithm: "brotliCompress",
+      filter: /\.(json|css|html)$/i,
+      exclude: [/\.(html)$/, /\.(br)$/, /\.(gz)$/],
+    }),
+  ],
   define: {
     "process.env.SHOPIFY_API_KEY": JSON.stringify(process.env.SHOPIFY_API_KEY),
   },
