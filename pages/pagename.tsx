@@ -38,7 +38,7 @@ export default function PageName() {
         </Layout.Section>
         <Layout.Section secondary>
           <Card sectioned>
-            <Text variant="headingMd" as="h1">
+            <Text variant="headingMd" as="h2">
               Heading
             </Text>
             <TextContainer>
