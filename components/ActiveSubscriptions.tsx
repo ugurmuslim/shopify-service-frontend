@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Card, DataTable, ButtonGroup, Button } from "@shopify/polaris";
-import { Redirect } from "@shopify/app-bridge/actions";
 import { Toast, useAppBridge } from "@shopify/app-bridge-react";
-import { useAuthenticatedFetch } from "../hooks";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Redirect } from "@shopify/app-bridge/actions";
+import { Button, ButtonGroup, DataTable, LegacyCard } from "@shopify/polaris";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import type { Subscription } from "../../@types/billing";
+import { useAuthenticatedFetch } from "../hooks";
 
 function generateRows(subscriptionData: Subscription) {
   const activeSubscriptions =
@@ -103,8 +103,8 @@ export function ActiveSubscriptions() {
   return (
     <>
       {toastMarkup}
-      <Card title="Active Subscriptions" sectioned>
-        <Card.Section>
+      <LegacyCard title="Active Subscriptions" sectioned>
+        <LegacyCard.Section>
           <div className="flex flex-col md:flex-row items-center justify-items-center gap-4">
             <div>Your active subscription is shown below,</div>
             <div>
@@ -126,8 +126,8 @@ export function ActiveSubscriptions() {
               </ButtonGroup>
             </div>
           </div>
-        </Card.Section>
-        <Card.Section>
+        </LegacyCard.Section>
+        <LegacyCard.Section>
           <DataTable
             columnContentTypes={["text", "text", "text", "text", "text"]}
             headings={["Plan Name", "Status", "Test", "Trial Days", "Amount"]}
@@ -139,8 +139,8 @@ export function ActiveSubscriptions() {
                 : subscription.data
             }
           />
-        </Card.Section>
-      </Card>
+        </LegacyCard.Section>
+      </LegacyCard>
     </>
   );
 }

@@ -1,20 +1,20 @@
+import { TitleBar } from "@shopify/app-bridge-react";
 import {
   ActionList,
-  Card,
-  Text,
+  AlphaStack,
   Image,
   Layout,
-  Page,
-  Stack,
+  LegacyCard,
+  LegacyStack,
   Link,
-  TextContainer,
+  Page,
+  Text,
 } from "@shopify/polaris";
-import { TitleBar } from "@shopify/app-bridge-react";
+import React, { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import trophyImgUrl from "../assets/home-trophy.png";
-import React, { Suspense } from "react";
-const ProductsCard = React.lazy(() => import("../components/ProductsCard"));
 import mixpanel from "../lib/mixpanel";
+const ProductsCard = React.lazy(() => import("../components/ProductsCard"));
 
 const updateMixPanel = () => {
   mixpanel.then((mp) => {
@@ -46,15 +46,15 @@ export default function HomePage() {
       <TitleBar title="App name" primaryAction={null} />
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            <Stack
+          <LegacyCard sectioned>
+            <LegacyStack
               wrap={false}
               spacing="extraTight"
               distribution="trailing"
               alignment="center"
             >
-              <Stack.Item fill>
-                <TextContainer spacing="loose">
+              <LegacyStack.Item fill>
+                <AlphaStack gap={"4"}>
                   <Text as="h2" variant="headingMd">
                     Nice work on building a Shopify app 🎉
                   </Text>
@@ -88,9 +88,9 @@ export default function HomePage() {
                     </Link>{" "}
                     📚{" "}
                   </p>
-                </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
+                </AlphaStack>
+              </LegacyStack.Item>
+              <LegacyStack.Item>
                 <div style={{ padding: "0 20px" }}>
                   <Image
                     source={trophyImgUrl}
@@ -98,9 +98,9 @@ export default function HomePage() {
                     width={120}
                   />
                 </div>
-              </Stack.Item>
-            </Stack>
-          </Card>
+              </LegacyStack.Item>
+            </LegacyStack>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section secondary>
           <Suspense fallback={<div>Loading...</div>}>
@@ -108,9 +108,9 @@ export default function HomePage() {
           </Suspense>
         </Layout.Section>
         <Layout.Section fullWidth>
-          <Card>
+          <LegacyCard>
             <ActionList actionRole="menuitem" items={pagesLinks} />
-          </Card>
+          </LegacyCard>
         </Layout.Section>
       </Layout>
     </Page>

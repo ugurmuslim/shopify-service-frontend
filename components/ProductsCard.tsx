@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Text, TextContainer, Button } from "@shopify/polaris";
+import { LegacyCard, Text, AlphaStack, Button } from "@shopify/polaris";
 import { Toast } from "@shopify/app-bridge-react";
 import { useAuthenticatedFetch } from "../hooks";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
@@ -73,8 +73,8 @@ export default function ProductsCard() {
   return (
     <>
       {toastMarkup}
-      <Card title="Product Counter" sectioned>
-        <TextContainer spacing="loose">
+      <LegacyCard title="Product Counter" sectioned>
+        <AlphaStack gap={"4"}>
           <p>
             Sample products are created with a default title and price. You can
             remove them at any time.
@@ -90,8 +90,8 @@ export default function ProductsCard() {
           <Button outline loading={isLoading} onClick={mutate}>
             Populate 2 products
           </Button>
-        </TextContainer>
-      </Card>
+        </AlphaStack>
+      </LegacyCard>
     </>
   );
 }

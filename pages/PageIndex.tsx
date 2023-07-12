@@ -1,11 +1,11 @@
 import {
-  Card,
-  Text,
+  AlphaStack,
   Image,
   Layout,
+  LegacyCard,
+  LegacyStack,
   Page,
-  Stack,
-  TextContainer,
+  Text,
 } from "@shopify/polaris";
 import { useNavigate } from "react-router";
 import trophyImgUrl from "../assets/home-trophy.png";
@@ -36,21 +36,21 @@ export default function PageIndex() {
     >
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            <Stack
+          <LegacyCard sectioned>
+            <LegacyStack
               wrap={false}
               spacing="extraTight"
               distribution="trailing"
               alignment="center"
             >
-              <Stack.Item fill>
-                <TextContainer spacing="loose">
+              <LegacyStack.Item fill>
+                <AlphaStack gap={"4"}>
                   <Text variant="headingMd" as="h1">
                     Page Index Example
                   </Text>
-                </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
+                </AlphaStack>
+              </LegacyStack.Item>
+              <LegacyStack.Item>
                 <div style={{ padding: "0 20px" }}>
                   <Image
                     source={trophyImgUrl}
@@ -58,27 +58,27 @@ export default function PageIndex() {
                     width={120}
                   />
                 </div>
-              </Stack.Item>
-            </Stack>
-          </Card>
+              </LegacyStack.Item>
+            </LegacyStack>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section secondary>
-          <Card sectioned>
-            <Stack
+          <LegacyCard sectioned>
+            <LegacyStack
               wrap={false}
               spacing="extraTight"
               distribution="trailing"
               alignment="center"
             >
-              <Stack.Item fill>
-                <TextContainer spacing="loose">
+              <LegacyStack.Item fill>
+                <AlphaStack gap={"4"}>
                   <Text variant="headingMd" as="h1">
                     Secondary Section
                   </Text>
-                </TextContainer>
-              </Stack.Item>
-            </Stack>
-          </Card>
+                </AlphaStack>
+              </LegacyStack.Item>
+            </LegacyStack>
+          </LegacyCard>
         </Layout.Section>
       </Layout>
     </Page>

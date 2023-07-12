@@ -1,4 +1,4 @@
-import { Text, Page, Stack } from "@shopify/polaris";
+import { Text, Page, LegacyStack } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { ActiveSubscriptions } from "../components/ActiveSubscriptions";
 
@@ -6,18 +6,18 @@ const Settings = () => {
   return (
     <Page>
       <TitleBar title="Settings" primaryAction={null} />
-      <Stack wrap={false} distribution="fill" alignment="center" vertical>
-        <Stack.Item>
-          <Stack vertical spacing="extraTight" alignment="center">
+      <LegacyStack wrap={false} distribution="fill" alignment="center" vertical>
+        <LegacyStack.Item>
+          <LegacyStack vertical spacing="extraTight" alignment="center">
             <Text variant="heading2xl" as="h1">
               Settings page
             </Text>
-          </Stack>
-        </Stack.Item>
-        <Stack.Item>
+          </LegacyStack>
+        </LegacyStack.Item>
+        <LegacyStack.Item>
           <ActiveSubscriptions />
-        </Stack.Item>
-      </Stack>
+        </LegacyStack.Item>
+      </LegacyStack>
     </Page>
   );
 };
