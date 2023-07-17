@@ -80,6 +80,7 @@ export default defineConfig({
     proxy: {
       "^/(\\?.*)?$": proxyOptions,
       "^/api(/|(\\?.*)?$)": proxyOptions,
+      "^/callback(/|(\\?.*)?$)": proxyOptions,
     },
   },
 });

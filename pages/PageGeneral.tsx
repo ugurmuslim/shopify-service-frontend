@@ -1,5 +1,4 @@
 import {
-  AlphaStack,
   Image,
   Layout,
   LegacyCard,
@@ -43,11 +42,9 @@ export default function PageGeneral() {
               alignment="center"
             >
               <LegacyStack.Item fill>
-                <AlphaStack gap={"4"}>
                   <Text variant="headingMd" as="h1">
                     Page General Example
                   </Text>
-                </AlphaStack>
               </LegacyStack.Item>
               <LegacyStack.Item>
                 <div style={{ padding: "0 20px" }}>
@@ -70,11 +67,11 @@ export default function PageGeneral() {
               alignment="center"
             >
               <LegacyStack.Item fill>
-                <AlphaStack gap={"4"}>
-                  <Text variant="headingMd" as="h1">
-                    Secondary Section
-                  </Text>
-                </AlphaStack>
+                {/*<VerticalStack gap={"4"}>*/}
+                {/*  <Text variant="headingMd" as="h1">*/}
+                {/*    Secondary Section*/}
+                {/*  </Text>*/}
+                {/*</VerticalStack>*/}
               </LegacyStack.Item>
             </LegacyStack>
           </LegacyCard>

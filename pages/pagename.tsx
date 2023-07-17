@@ -1,4 +1,4 @@
-import { LegacyCard, Page, Layout, AlphaStack, Text } from "@shopify/polaris";
+import { LegacyCard, Page, Layout, VerticalStack, Text } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
 export default function PageName() {
@@ -23,17 +23,17 @@ export default function PageName() {
             <Text variant="headingMd" as="h2">
               Heading
             </Text>
-            <AlphaStack>
+            <VerticalStack>
               <p>Body</p>
-            </AlphaStack>
+            </VerticalStack>
           </LegacyCard>
           <LegacyCard sectioned>
             <Text variant="headingMd" as="h2">
               Heading
             </Text>
-            <AlphaStack>
+            <VerticalStack>
               <p>Body</p>
-            </AlphaStack>
+            </VerticalStack>
           </LegacyCard>
         </Layout.Section>
         <Layout.Section secondary>
@@ -41,9 +41,9 @@ export default function PageName() {
             <Text variant="headingMd" as="h2">
               Heading
             </Text>
-            <AlphaStack>
+            <VerticalStack>
               <p>Body</p>
-            </AlphaStack>
+            </VerticalStack>
           </LegacyCard>
         </Layout.Section>
       </Layout>
